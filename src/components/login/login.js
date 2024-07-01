@@ -23,10 +23,10 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    axios.post("http://localhost:3001/login", user)
+    axios.post("http://localhost:3001/register", user)
       .then(res => {
         message.success("Login successful");
-        navigate("/homepage");
+        navigate("/register");
       })
       .catch(error => {
         message.error("Login failed");

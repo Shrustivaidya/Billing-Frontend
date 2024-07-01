@@ -1,12 +1,33 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,message,Select} from 'antd';
 import { UserOutlined, ShoppingCartOutlined, TagOutlined, DollarOutlined, FieldTimeOutlined, MessageOutlined } from '@ant-design/icons';
 import './homepage.css';
+import axios from "axios";
+
+const { Option } = Select;
 
 function Homepage() {
   const onFinish = (values) => {
     console.log('Received values of form:', values);
+    handleSubmit(values); // Pass form values to handleSubmit
+ 
   };
+
+  
+
+
+  
+  const handleSubmit = (user) => {
+    axios.post("http://localhost:3001/homepage", user)
+    .then(res => {
+      message.success("Login successful");
+    })
+    .catch(error => {
+     
+      console.error("Login error:", error);
+    
+    });
+  }
 
   return (
     <div className="container">
@@ -40,10 +61,18 @@ function Homepage() {
         <Form.Item
           label="Category"
           name="category"
-          rules={[{ required: true, message: 'Please input the category!' }]}
+          rules={[{ required: true, message: 'Please select the category!' }]}
         >
-          <Input prefix={<TagOutlined />} placeholder="Category" />
-        </Form.Item>
+        <Select placeholder="Select a category" prefix={<TagOutlined />}>
+            <Option value="Master">Master</Option>
+            <Option value="Admin">Admin</Option>
+            {/* {categories.map(category => (
+              <Option key={category.id} value={category.name}>
+                {category.name}
+              </Option>
+            ))} */}
+          </Select>
+          </Form.Item>
         <Form.Item
           label="Amount"
           name="amount"
@@ -59,10 +88,11 @@ function Homepage() {
           <Input prefix={<MessageOutlined />} placeholder="Remark" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form.Item>
+        
       </Form>
     </div>
   );
