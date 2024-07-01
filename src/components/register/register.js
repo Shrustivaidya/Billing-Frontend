@@ -1,8 +1,11 @@
 import axios from "axios"
 import "./register.css"
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom";
+import Login from "../login/login";
 
 const Register = () =>{
+    const navigate = useNavigate(); 
     const [ user, setUser] = useState({
         name: "",
         email:"",
@@ -23,7 +26,7 @@ const Register = () =>{
     const register= () => {
         const { name, email, password, reEnterPassword } = user
         if( name && email && password && (password === reEnterPassword)){
-        axios.post("http://localhost:9002/register",user)
+        axios.post("http://localhost:3001/register",user)
         .then(res => console.log(res))
         }else{
             alert("invalid input")
@@ -41,9 +44,9 @@ const Register = () =>{
     <input type ="text"  name="email"  value={user.email} placeholder="Your Email" onChange={handleChange}></input>
     <input type ="password"  name="password"  value={user.password} placeholder="Your Password" onChange={handleChange}></input>
     <input type ="password"  name="reEnterPassword"  value={user.reEnterPassword} placeholder="Re-enter Password" onChange={handleChange}></input>
-    <div className="button"onClick={register}>Register</div>
+    <div className="button"onClick={Login}>Register</div>
       <div>or</div>
-    <div className="button">Login</div>
+    <div className="button"onClick={() => navigate("/login")}>Login</div>
   </div>
   )
 }
