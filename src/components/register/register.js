@@ -27,13 +27,14 @@ const Register = () =>{
         const { name, email, password, reEnterPassword } = user
         if( name && email && password && (password === reEnterPassword)){
         axios.post("http://localhost:3001/register",user)
-        .then(res => console.log(res))
-        }else{
-            alert("invalid input")
-        }
-        
+        .then( res => {
+            alert(res.data.message)
+            navigate("/login")
+        })
+    } else {
+        alert("invalid input")
+    }
     
-
     }
 
   return (
@@ -44,7 +45,7 @@ const Register = () =>{
     <input type ="text"  name="email"  value={user.email} placeholder="Your Email" onChange={handleChange}></input>
     <input type ="password"  name="password"  value={user.password} placeholder="Your Password" onChange={handleChange}></input>
     <input type ="password"  name="reEnterPassword"  value={user.reEnterPassword} placeholder="Re-enter Password" onChange={handleChange}></input>
-    <div className="button"onClick={Login}>Register</div>
+    <div className="button" onClick={register}>Register</div>
       <div>or</div>
     <div className="button"onClick={() => navigate("/login")}>Login</div>
   </div>

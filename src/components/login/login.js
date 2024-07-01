@@ -22,6 +22,7 @@ function Login() {
 const Login = () => {
     axios.post("http://localhost:3001/create",user)
     .then(res => console.log(res))
+    navigate("/register");
 }
 
   return (
@@ -30,9 +31,9 @@ const Login = () => {
     <h1>Login</h1>
     <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
     <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
-    <div className="button" onClick={() => navigate("/register")}>Login</div>
+    <div className="button"  onClick={Login}>Login</div>
     <div>or</div>
-    <div className="button"onClick={Register}>Register</div>
+    <div className="button" onClick={Register}>Register</div>
 </div>
   )
 }
