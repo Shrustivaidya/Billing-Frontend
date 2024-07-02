@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button, Space, message, Modal, DatePicker } from 'antd';
-import { EditOutlined, DeleteOutlined, FormOutlined, FilterOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, FilterOutlined,PrinterOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import './Dashboard.css'; 
 
@@ -31,9 +31,9 @@ const Dashboard = () => {
   };
 
   const handleEdit = (id) => {
-    // Implement edit functionality
-    navigate(`/edit/${id}`);
+    navigate(`/homepage/${id}`);
   };
+  
 
   const handleDelete = async (id) => {
     try {
@@ -43,14 +43,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleUpdate = (id) => {
-    // Implement update functionality
-    console.log('Update clicked for ID:', id);
-  };
 
-  const handleSelect= ()=>{
 
-  }
+
 
   const confirmDelete = (id) => {
     confirm({
@@ -99,19 +94,12 @@ const Dashboard = () => {
     onChange: onSelectChange,
     onSelectAll: handleSelectAll,
   };
+  const handlePrint = () => {
+    window.print();
+  };
 
   const columns = [
-    {
-      title: 'Select',
-      dataIndex: 'select',
-      render: (_, record) => (
-        <input
-          type="checkbox"
-          checked={selectedRowKeys.includes(record._id)}
-          onChange={() => handleSelect(record._id)}
-        />
-      ),
-    },
+    
     {
       title: 'Date',
       dataIndex: 'date',
@@ -148,9 +136,7 @@ const Dashboard = () => {
           <Button type="danger" icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
             Delete
           </Button>
-          <Button type="default" icon={<FormOutlined />} onClick={() => handleUpdate(record._id)}>
-            Update
-          </Button>
+         
         </Space>
       ),
     },
@@ -180,6 +166,13 @@ const Dashboard = () => {
           columns={columns}
         />
       </div>
+      <Space>
+      <div className="print-button-container">
+        <Button type="primary" className="print-button" icon={<PrinterOutlined />} onClick={handlePrint}>
+          Print All
+        </Button>
+      </div>
+      </Space>
     </div>
   );
 };

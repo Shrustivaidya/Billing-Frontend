@@ -1,0 +1,24 @@
+.edit-billing-data-container {
+    width: 400px;
+    text-align: center;
+   
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-billing-data-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .save-cancel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .ant-picker {
+    width: 100%;
+  }
