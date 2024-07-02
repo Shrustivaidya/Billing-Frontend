@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   const handleRegister = () => {
-    navigate("/register");
+    navigate("/");
   };
 
   return (
