@@ -31,9 +31,9 @@ const Dashboard = () => {
   };
 
   const handleEdit = (id) => {
-    // Implement edit functionality
-    navigate(`/edit/${id}`);
+    navigate(`/homepage/${id}`);
   };
+  
 
   const handleDelete = async (id) => {
     try {
@@ -43,14 +43,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleUpdate = (id) => {
-    // Implement update functionality
-    console.log('Update clicked for ID:', id);
-  };
 
-  const handleSelect= ()=>{
 
-  }
+
 
   const confirmDelete = (id) => {
     confirm({
@@ -101,17 +96,7 @@ const Dashboard = () => {
   };
 
   const columns = [
-    {
-      title: 'Select',
-      dataIndex: 'select',
-      render: (_, record) => (
-        <input
-          type="checkbox"
-          checked={selectedRowKeys.includes(record._id)}
-          onChange={() => handleSelect(record._id)}
-        />
-      ),
-    },
+    
     {
       title: 'Date',
       dataIndex: 'date',
@@ -148,9 +133,7 @@ const Dashboard = () => {
           <Button type="danger" icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
             Delete
           </Button>
-          <Button type="default" icon={<FormOutlined />} onClick={() => handleUpdate(record._id)}>
-            Update
-          </Button>
+         
         </Space>
       ),
     },

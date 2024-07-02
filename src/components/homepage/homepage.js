@@ -3,13 +3,16 @@ import { Form, Input, Button,message,Select} from 'antd';
 import { UserOutlined, ShoppingCartOutlined, TagOutlined, DollarOutlined, FieldTimeOutlined, MessageOutlined } from '@ant-design/icons';
 import './homepage.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 function Homepage() {
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log('Received values of form:', values);
     handleSubmit(values); // Pass form values to handleSubmit
+    navigate("/register");
  
   };
 
