@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, DatePicker, message,Select } from 'antd';
+import { Form, Input, Button, DatePicker, message,Select, Space } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import moment from 'moment';
+import  "./Edit.css";
+
 
 const { Option } = Select;
 
@@ -74,9 +76,16 @@ const EditBillingData = () => {
           <Input />
         </Form.Item>
         <Form.Item>
+          <Space>
+        {/* <div className="save-cancel-buttons"> */}
           <Button type="primary" htmlType="submit">
             Save
           </Button>
+          <Button type="primary" htmlType="submit" >
+            Cancel
+          </Button>
+          {/* </div> */}
+          </Space>
         </Form.Item>
       </Form>
     </div>

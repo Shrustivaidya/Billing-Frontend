@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button, Space, message, Modal, DatePicker } from 'antd';
-import { EditOutlined, DeleteOutlined, FormOutlined, FilterOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, FilterOutlined,PrinterOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import './Dashboard.css'; 
 
@@ -94,6 +94,9 @@ const Dashboard = () => {
     onChange: onSelectChange,
     onSelectAll: handleSelectAll,
   };
+  const handlePrint = () => {
+    window.print();
+  };
 
   const columns = [
     
@@ -163,6 +166,13 @@ const Dashboard = () => {
           columns={columns}
         />
       </div>
+      <Space>
+      <div className="print-button-container">
+        <Button type="primary" className="print-button" icon={<PrinterOutlined />} onClick={handlePrint}>
+          Print All
+        </Button>
+      </div>
+      </Space>
     </div>
   );
 };
