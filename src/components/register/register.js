@@ -35,7 +35,7 @@ const Register = () => {
           console.error("Registration error:", error);
         });
     } else {
-      message.error("Invalid input or passwords don't match");
+      message.error("Please Register first");
     }
   };
 

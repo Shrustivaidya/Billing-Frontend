@@ -23,15 +23,25 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    axios.post("http://localhost:3001/register", user)
+    const {email, password} = user;
+    if (email && password) {
+    axios.post("http://localhost:3001/register", user) 
       .then(res => {
-        message.success("Login successful");
-        navigate("/register");
+        if (res.data.success) {
+          message.success("Login successful");
+          navigate("/register"); 
+        } else {
+          message.error("Login failed. User not found.");
+          navigate("/register"); 
+        }
       })
       .catch(error => {
         message.error("Login failed");
         console.error("Login error:", error);
       });
+    } else {
+      message.error("Please enter vaild Email and Pasword");
+    }
   };
 
   const handleRegister = () => {

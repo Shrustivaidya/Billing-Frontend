@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, DatePicker, message } from 'antd';
+import { Form, Input, Button, DatePicker, message,Select } from 'antd';
+import { TagOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import moment from 'moment';
+
+const { Option } = Select;
 
 const EditBillingData = () => {
   const { id } = useParams();
@@ -60,7 +63,9 @@ const EditBillingData = () => {
           <Input />
         </Form.Item>
         <Form.Item name="category" label="Category" rules={[{ required: true, message: 'Please enter the category' }]}>
-          <Input />
+        <Select placeholder="Select a category" prefix={<TagOutlined />}>
+            <Option value="Master">Master</Option>
+            <Option value="Admin">Admin</Option></Select> 
         </Form.Item>
         <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Please enter the amount' }]}>
           <Input type="number" />
