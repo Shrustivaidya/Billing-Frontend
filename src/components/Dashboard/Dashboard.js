@@ -77,7 +77,7 @@ const Dashboard = () => {
   };
 
   const onSelectChange = (selectedRowKeys) => {
-    setSelectedRowKeys(selectedRowKeys);
+    setSelectedRowKeys(selectedRowKeys);  
   };
 
   const handleSelectAll = (selected, selectedRows, changeRows) => {
@@ -97,6 +97,7 @@ const Dashboard = () => {
   const handlePrint = () => {
     window.print();
   };
+
 
   const columns = [
     
