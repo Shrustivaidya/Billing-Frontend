@@ -22,26 +22,38 @@ const Login = () => {
     });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 9;
+  };
+
   const handleLogin = () => {
-    const {email, password} = user;
-    if (email && password) {
-    axios.post("http://localhost:3001/register", user) 
+    const { email, password } = user;
+    if (!validateEmail(email)) {
+      message.error("Please enter a valid Email and Password");
+      return;
+    }
+    if (!validatePassword(password)) {
+      message.error("Password must be at least 9 characters long");
+      return;
+    }
+    axios.post("http://localhost:3001/register", user)
       .then(res => {
         if (res.data.success) {
           message.success("Login successful");
-          navigate("/register"); 
+          navigate("/register");
         } else {
           message.error("Login failed. User not found.");
-          navigate("/register"); 
         }
       })
       .catch(error => {
         message.error("Login failed");
         console.error("Login error:", error);
       });
-    } else {
-      message.error("Please enter vaild Email and Pasword");
-    }
   };
 
   const handleRegister = () => {
@@ -55,6 +67,7 @@ const Login = () => {
         prefix={<UserOutlined />}
         type="text"
         name="email"
+        size="large"
         value={user.email}
         onChange={handleChange}
         placeholder="Enter your Email"
@@ -63,6 +76,7 @@ const Login = () => {
         prefix={<LockOutlined />}
         type="password"
         name="password"
+        size="large"
         value={user.password}
         onChange={handleChange}
         placeholder="Enter your Password"

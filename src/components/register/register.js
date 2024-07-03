@@ -35,7 +35,7 @@ const Register = () => {
           console.error("Registration error:", error);
         });
     } else {
-      message.error("Please Register first");
+      message.error("Please Register First");
     }
   };
 
