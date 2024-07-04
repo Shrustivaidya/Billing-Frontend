@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button, message } from "antd";
+import { Input, Button, message, Form } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
 import axios from "axios";
@@ -63,6 +63,8 @@ const Login = () => {
   return (
     <div className="login">
       <h1>Login</h1>
+      <Form layout="vertical">
+        <Form.Item name="Email" label="Email" rules={[{ required: true, message: 'Please enter the your Email' }]}>
       <Input
         prefix={<UserOutlined />}
         type="text"
@@ -72,6 +74,8 @@ const Login = () => {
         onChange={handleChange}
         placeholder="Enter your Email"
       />
+      </Form.Item>
+      <Form.Item name="Password" label="Password" rules={[{ required: true, message: 'Please enter the your Password' }]}>
       <Input.Password
         prefix={<LockOutlined />}
         type="password"
@@ -81,6 +85,8 @@ const Login = () => {
         onChange={handleChange}
         placeholder="Enter your Password"
       />
+       </Form.Item>
+      </Form>
       <Button type="primary" className="button" onClick={handleLogin}>
         Login
       </Button>
