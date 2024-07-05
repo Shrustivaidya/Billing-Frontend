@@ -47,11 +47,11 @@ const Login = () => {
           message.success("Login successful");
           navigate("/register");
         } else {
-          message.error("Login failed. User not found.");
+          message.error("Please Registered First");
         }
       })
       .catch(error => {
-        message.error("Login failed");
+        message.error("Login failed User already exists");
         console.error("Login error:", error);
       });
   };
