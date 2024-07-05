@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Input, Button, message } from "antd";
+import { Input, Button, message,Form } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
@@ -42,38 +42,51 @@ const Register = () => {
   return (
     <div className="register">
       <h1>Register</h1>
+      
+      <Form layout="vertical">
+      <Form.Item name="Name" label="Name" rules={[{ required: true, message: 'Please enter the your Name' }]}>
       <Input
         prefix={<UserOutlined />}
         type="text"
         name="name"
+        size="small"
         value={user.name}
         placeholder="Your Name"
         onChange={handleChange}
       />
+      </Form.Item>
+      <Form.Item name="Email" label="Email" rules={[{ required: true, message: 'Please enter the your Email' }]}>
       <Input
         prefix={<MailOutlined />}
         type="email"
         name="email"
+        size="small"
         value={user.email}
         placeholder="Your Email"
         onChange={handleChange}
-      />
+      /></Form.Item>
+      <Form.Item name="Password" label="Password" rules={[{ required: true, message: 'Please enter the your Password' }]}>
       <Input.Password
         prefix={<LockOutlined />}
         type="password"
         name="password"
+        size="small"
         value={user.password}
         placeholder="Your Password"
         onChange={handleChange}
-      />
+      /></Form.Item>
+      <Form.Item name="Re-enter Password" label="Re-enter Password" rules={[{ required: true, message: 'Please enter the your Re-enter Password' }]}>
       <Input.Password
         prefix={<LockOutlined />}
         type="password"
         name="reEnterPassword"
+        size="small"
         value={user.reEnterPassword}
         placeholder="Re-enter Password"
         onChange={handleChange}
       />
+      </Form.Item>
+    </Form>
       <Button type="primary" className="button" onClick={register}>
         Register
       </Button>
