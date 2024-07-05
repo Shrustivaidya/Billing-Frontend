@@ -41,7 +41,7 @@ const Login = () => {
       message.error("Password must be at least 9 characters long");
       return;
     }
-    axios.post("http://localhost:3001/register", user)
+    axios.post("http://localhost:3001/login", user)
       .then(res => {
         if (res.data.success) {
           message.success("Login successful");
