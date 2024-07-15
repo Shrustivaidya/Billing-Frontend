@@ -2,84 +2,75 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content:left;
+    flex-direction: column;
     align-items: center;
-    background-color: #f0f2f5; 
-    margin-top: auto;
-  }
-  
-  .invoice-form-container {
-    width: 500%;
-   
-    height: 100px;
-    max-width: 600px;
-    padding: 20px;
-    border-radius: 5px;
-    /* overflow:scroll; */
-    display: flex;
-    flex-direction: column;
-    min-height: 510px; 
-  }
-  
-  .invoice-form-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .invoice-form-content h3 {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  
-  .input-fields {
-    margin-bottom: 10px;
-  }
-  
-  .input-fields label {
-    display: block;
-    margin-bottom: 4px;
-  }
-  
-  .description-table {
-    flex: 1; /* Allows table to take remaining space */
-    margin-bottom: 10px;
-  }
-  
-  .summary, .signature {
-    margin-top: 10px;
-    text-align: right;
-  }
-  
-  .signature {
-    text-align: center;
-  }
-  
-  .table-container {
-    margin-bottom: 20px;
-  }
-  
-  .firstTable {
-    margin-bottom: 20px;
-  }
-  
-  .ant-table {
-    font-size: 0.85em;
-  }
-  
-  .ant-table th, .ant-table td {
-    padding: 8px;
-  }
-  
-  .ant-input {
+    background-color: #f0f2f5;
+    max-width: 1200px;
+    
+    padding: 10px;
+}
+
+.invoice-form-container {
     width: 100%;
-    font-size: 0.85em;
-  }
-  
-  .date-picker {
-    width: 200px;
-  }
-  
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.invoice-box {
+    background-color: #fff;
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    height: auto;
+}
+
+.invoice-box h3 {
+    text-align: center;
+    margin-bottom: 4px; /* Reduced margin */
+    font-size: 0.9em; /* Reduced font size */
+}
+
+.input-fields {
+    margin-bottom: 6px; /* Reduced margin */
+}
+
+.input-fields label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.75em; /* Reduced font size */
+}
+
+.description-table {
+    margin-bottom: 6px; /* Reduced margin */
+}
+
+.summary, .signature {
+    margin-top: 6px; /* Reduced margin */
+    text-align: right;
+}
+
+.signature {
+    text-align: center;
+}
+
+.ant-table {
+    font-size: 0.75em;
+}
+
+.ant-table th, .ant-table td {
+    padding: 4px;
+}
+
+.ant-input {
+    width: 100%;
+    font-size: 0.75em;
+    height: 20px; /* Further adjusted height */
+}
+
+.date-picker {
+    width: 100%;
+    font-size: 0.75em; /* Reduced font size */
+    height: 20px; /* Adjusted height */
+}
