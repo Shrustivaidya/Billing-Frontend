@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Table, Row, Col, DatePicker } from "antd";
+import { Input, Table, Row, Col, DatePicker, Form } from "antd";
 import "./InvoiceFrom.css";
 
 const InvoiceFrom = () => {
@@ -9,8 +9,14 @@ const InvoiceFrom = () => {
       dataIndex: "slno",
       key: "slno",
       align: "center",
-      width: 80, // Adjust the width here
-      render: () => <Input className="slno" style={{ width: "100%" }} />,
+      width: 20, // Adjust the width here
+      render: () => (
+        <div style={{ display: "flex", alignItems: "center" }}>
+         <Form.Item style={{ marginBottom: 0 }}>
+          <Input className="slno-input" />
+        </Form.Item>
+        </div>
+      ),
     },
     {
       title: "Date:",
@@ -21,7 +27,9 @@ const InvoiceFrom = () => {
       render: () => (
         <Row gutter={8}>
           <Col span={24}>
-            <DatePicker style={{ width: "100%" }} />
+          <Form.Item style={{ marginBottom: 0 }}>
+          <DatePicker className="date-picker" style={{ width: "100%" }} />
+        </Form.Item>
           </Col>
         </Row>
       ),
@@ -30,7 +38,7 @@ const InvoiceFrom = () => {
 
   const descriptionColumns = [
     {
-      title: "SL No:",
+      title: "SLNo:",
       dataIndex: "slno",
       key: "slno",
       width: 20,
@@ -74,8 +82,8 @@ const InvoiceFrom = () => {
 
   const dataDescription = [
     { key: "1" },
-    // { key: "2" },
-    // { key: "3" },
+   // { key: "2" },
+   // { key: "3" },
   ];
 
   const total = 123.45; // Replace with actual total value
@@ -86,32 +94,27 @@ const InvoiceFrom = () => {
         {Array.from({ length: 4 }).map((_, index) => (
           <div key={index} className="invoice-box">
             <h3>CASH MEMO</h3>
-            <Table
-              className="firstTable"
-              columns={columns}
-              dataSource={data}
-              pagination={false}
-              bordered
-            />
+            <Form>
+              <Table
+                className="firstTable"
+                columns={columns}
+                dataSource={data}
+                pagination={false}
+                bordered
+              />
+            </Form>
             <div className="input-fields">
-              <Row gutter={16} justify="space-between">
-                <Col span={24}>
-                  <label>Retailer Name :</label>
+              <Form layout="inline" className="horizontal-form">
+                <Form.Item label="Retailer Name:" className="horizontal-form-item">
                   <Input placeholder="Enter Retailer Name" />
-                </Col>
-              </Row>
-              <Row gutter={16} justify="space-between">
-                <Col span={24}>
-                  <label>Sold To :</label>
+                </Form.Item>
+                <Form.Item label="Sold To:" className="horizontal-form-item">
                   <Input defaultValue="AKSHARTH SOLUTIONS PVT LTD" />
-                </Col>
-              </Row>
-              <Row gutter={16} justify="space-between">
-                <Col span={24}>
-                  <label>Retailer Address :</label>
+                </Form.Item>
+                <Form.Item label="Retailer Address:" className="horizontal-form-item">
                   <Input defaultValue="GADARWARA" />
-                </Col>
-              </Row>
+                </Form.Item>
+              </Form>
             </div>
             <Table
               columns={descriptionColumns}

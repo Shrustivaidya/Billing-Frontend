@@ -5,8 +5,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #f0f2f5;
-    max-width: 1200px;
-    
+    max-width: 800px;
     padding: 10px;
 }
 
@@ -16,15 +15,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    height: 500px;
 }
 
 .invoice-box {
     background-color: #fff;
-    padding: 8px; /* Reduced padding */
+    padding: 20px; /* Increased padding */
     border: 1px solid #d9d9d9;
     border-radius: 4px;
+    width: 350px;
     height: auto;
 }
+
 
 .invoice-box h3 {
     text-align: center;
@@ -33,7 +35,7 @@
 }
 
 .input-fields {
-    margin-bottom: 6px; /* Reduced margin */
+    margin-bottom: 3px;
 }
 
 .input-fields label {
@@ -46,10 +48,10 @@
     margin-bottom: 6px; /* Reduced margin */
 }
 
-.summary, .signature {
-    margin-top: 6px; /* Reduced margin */
+/* .summary, .signature {
+    margin-top: 6px; 
     text-align: right;
-}
+} */
 
 .signature {
     text-align: center;
@@ -70,7 +72,29 @@
 }
 
 .date-picker {
-    width: 100%;
-    font-size: 0.75em; /* Reduced font size */
-    height: 20px; /* Adjusted height */
+    width: 200px;
 }
+horizontal-form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .horizontal-form-item {
+    flex: 1;
+    min-width: 200px; /* Adjust the min-width as necessary */
+    margin-right: 16px;
+    margin-bottom: 8px; /* Add some margin for better spacing */
+  }
+  .horizontal-form-item .ant-form-item-label {
+    min-width: 120px; /* Adjust the label width if necessary */
+    white-space: nowrap;
+  }
+  .horizontal-form-item .ant-input {
+    width: calc(100% - 120px); /* Adjust the width of the input fields */
+  }
+  .horizontal-form-item .ant-input {
+    width: 200px; /* Adjust the width as needed */
+  }
+
+  
