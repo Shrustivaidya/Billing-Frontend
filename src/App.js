@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Edit from './components/Buttons/Edit';
 import Invoice from './InvoiceFrom/Invoice';
 
+
 function App() {
   return (
     <div className="App">
@@ -17,7 +18,10 @@ function App() {
           <Route path="/register" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/homepage/:id" element={<Edit/>} />
+
           <Route path="/invoice" element={<Invoice/>} />
+
+          
          
           
           

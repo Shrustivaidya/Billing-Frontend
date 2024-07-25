@@ -98,6 +98,7 @@ const Dashboard = () => {
     try {
       // Filter out null or undefined values from selectedRowKeys
       const validIds = selectedRowKeys.filter(id => id);
+
   
       // Send the DELETE request to the backend with validIds
       await axios.delete('http://localhost:3001/homepage', {
@@ -110,11 +111,13 @@ const Dashboard = () => {
       // Show success message
       message.success('Selected billing records deleted successfully');
     } catch (error) {
+
+
       console.error('Error deleting selected billing records:', error);
       message.error('Failed to delete selected billing records');
     }
   };
-  
+
 
   const handleFilter = () => {
     // Implement filter functionality based on selectedDateRange
@@ -143,8 +146,10 @@ const Dashboard = () => {
   };
 
   const handlePrint = () => {
+
     navigate('/invoice', { state: { billingData } });
   // window.print()
+
   };
 
   const deleteIconClass = isAnyRowSelected ? 'delete-icon selected' : 'delete-icon';

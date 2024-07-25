@@ -71,6 +71,7 @@
 .delete-icon.selected {
   color: red;
 }
+
 /* Dashboard.css */
 
 /* Hide action column when printing */
@@ -109,4 +110,5 @@
     padding: 8px;
   }
 }
+
 
