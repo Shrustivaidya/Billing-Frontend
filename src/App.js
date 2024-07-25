@@ -5,7 +5,8 @@ import Register from './components/register/register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import Edit from './components/Buttons/Edit';
-import InvoiceFrom from './InvoiceFrom/InvoiceFrom';
+import Invoice from './InvoiceFrom/Invoice';
+
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
           <Route path="/register" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/homepage/:id" element={<Edit/>} />
-          <Route path="/invoicepdf" element={<InvoiceFrom/>} />
+
+          <Route path="/invoice" element={<Invoice/>} />
+
+          
          
           
           

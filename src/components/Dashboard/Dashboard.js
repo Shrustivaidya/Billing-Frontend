@@ -99,26 +99,25 @@ const Dashboard = () => {
       // Filter out null or undefined values from selectedRowKeys
       const validIds = selectedRowKeys.filter(id => id);
 
-      // Send the DELETE request to the backend
+  
+      // Send the DELETE request to the backend with validIds
       await axios.delete('http://localhost:3001/homepage', {
-        data: { _id: validIds }
+        data: { _ids: validIds }
       });
-
+  
       // Refresh data after delete
       fetchBillingData();
-
+  
       // Show success message
       message.success('Selected billing records deleted successfully');
-
-      // Clear selection
-      setSelectedRowKeys([]);
-      setIsAnyRowSelected(false);
     } catch (error) {
-      // Log and show error message
+
+
       console.error('Error deleting selected billing records:', error);
       message.error('Failed to delete selected billing records');
     }
   };
+
 
   const handleFilter = () => {
     // Implement filter functionality based on selectedDateRange
@@ -147,7 +146,10 @@ const Dashboard = () => {
   };
 
   const handlePrint = () => {
-    navigate('/invoicepdf');
+
+    navigate('/invoice', { state: { billingData } });
+  // window.print()
+
   };
 
   const deleteIconClass = isAnyRowSelected ? 'delete-icon selected' : 'delete-icon';
@@ -196,7 +198,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      
       <div className="dashboard-header">
+        
         <h1>Billing Information</h1>
         <Space>
           <DeleteOutlined className={deleteIconClass} onClick={isAnyRowSelected ? handleDeleteSelectedRows : null} /> {/* Highlighted change */}
@@ -209,6 +213,7 @@ const Dashboard = () => {
           </Button>
         </Space>
       </div>
+      
       <div className="table-container">
         <Table
           rowSelection={{
