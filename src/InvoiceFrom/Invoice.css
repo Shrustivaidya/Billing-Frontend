@@ -1,0 +1,70 @@
+/* Invoice.css */
+.invoice-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  
+  .invoice-copy {
+    width: 48%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .invoice-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .invoice-table, .invoice-table th, .invoice-table td {
+    border: 1px solid #ddd;
+  }
+  
+  .invoice-table th, .invoice-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .invoice-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .invoice-table tfoot {
+    font-weight: bold;
+  }
+  
+  .total-label {
+    text-align: right;
+  }
+  
+  .total-amount {
+    text-align: left;
+  }
+  
+  @media print {
+    .invoice-container {
+      margin: 200;
+      padding: 0;
+      
+    }
+  
+    .invoice-copy {
+      page-break-inside: avoid;
+      margin: 0;
+    
+    }
+    .invoice-table {
+        width: 100%; /* Ensure table width fits within the container */
+       
+    }
+    
+  }
+  

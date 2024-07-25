@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button, Space, message, Modal, DatePicker } from 'antd';
-import { EditOutlined, DeleteOutlined, FilterOutlined,PrinterOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, FilterOutlined, PrinterOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import './Dashboard.css'; 
+import './Dashboard.css';
 
 const { confirm } = Modal;
-const { RangePicker } = DatePicker; 
+const { RangePicker } = DatePicker;
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [billingData, setBillingData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [isAnyRowSelected, setIsAnyRowSelected] = useState(false);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
 
   useEffect(() => {
@@ -33,19 +35,17 @@ const Dashboard = () => {
   const handleEdit = (id) => {
     navigate(`/homepage/${id}`);
   };
-  
 
   const handleDelete = async (id) => {
     try {
-      await confirmDelete(id);
+      await axios.delete(`http://localhost:3001/homepage/${id}`);
+      fetchBillingData(); // Refresh data after delete
+      message.success('Billing record deleted successfully');
     } catch (error) {
       console.error('Error deleting billing record:', error);
+      message.error('Failed to delete billing record');
     }
   };
-
-
-
-
 
   const confirmDelete = (id) => {
     confirm({
@@ -71,19 +71,66 @@ const Dashboard = () => {
     }
   };
 
+  
+
+  const handleDeleteSelectedRows = async () => {
+    try {
+      await confirmDeleteSelectedRows();
+    } catch (error) {
+      console.error('Error deleting selected billing records:', error);
+    }
+  };
+
+  const confirmDeleteSelectedRows = () => {
+    confirm({
+      title: 'Are you sure you want to delete all selected records?',
+      icon: <DeleteOutlined />,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        deleteSelectedBillingRecords();
+      },
+    });
+  };
+
+  const deleteSelectedBillingRecords = async () => {
+    try {
+      // Filter out null or undefined values from selectedRowKeys
+      const validIds = selectedRowKeys.filter(id => id);
+  
+      // Send the DELETE request to the backend with validIds
+      await axios.delete('http://localhost:3001/homepage', {
+        data: { _ids: validIds }
+      });
+  
+      // Refresh data after delete
+      fetchBillingData();
+  
+      // Show success message
+      message.success('Selected billing records deleted successfully');
+    } catch (error) {
+      console.error('Error deleting selected billing records:', error);
+      message.error('Failed to delete selected billing records');
+    }
+  };
+  
+
   const handleFilter = () => {
     // Implement filter functionality based on selectedDateRange
     console.log('Filter clicked with range:', selectedDateRange);
   };
 
   const onSelectChange = (selectedRowKeys) => {
-    setSelectedRowKeys(selectedRowKeys);  
+    setSelectedRowKeys(selectedRowKeys);
+    setIsAnyRowSelected(selectedRowKeys.length > 0);
   };
-
+  
   const handleSelectAll = (selected, selectedRows, changeRows) => {
-    const selectedIds = changeRows.map((row) => row._id);
-    setSelectedRowKeys(selected ? selectedIds : []);
+    setSelectedRowKeys(selected ? selectedRows.map(row => row._id) : []);
+    setIsAnyRowSelected(selected);
   };
+  
 
   const handleDateRangeChange = (dates) => {
     setSelectedDateRange(dates);
@@ -94,13 +141,15 @@ const Dashboard = () => {
     onChange: onSelectChange,
     onSelectAll: handleSelectAll,
   };
+
   const handlePrint = () => {
-    window.print();
+    navigate('/invoice', { state: { billingData } });
+  // window.print()
   };
 
+  const deleteIconClass = isAnyRowSelected ? 'delete-icon selected' : 'delete-icon';
 
   const columns = [
-    
     {
       title: 'Date',
       dataIndex: 'date',
@@ -137,7 +186,6 @@ const Dashboard = () => {
           <Button type="danger" icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
             Delete
           </Button>
-         
         </Space>
       ),
     },
@@ -145,18 +193,22 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      
       <div className="dashboard-header">
+        
         <h1>Billing Information</h1>
         <Space>
-        <Button type="primary" className="new-button" onClick={handleNewButtonClick}>
-          New +
-        </Button>
-        <RangePicker className="date-picker" onChange={handleDateRangeChange} />
-        <Button type="default" className="filter-button" icon={<FilterOutlined />} onClick={handleFilter}>
-          Filter
-        </Button>
+          <DeleteOutlined className={deleteIconClass} onClick={isAnyRowSelected ? handleDeleteSelectedRows : null} /> {/* Highlighted change */}
+          <Button type="primary" className="new-button" onClick={handleNewButtonClick}>
+            New +
+          </Button>
+          <RangePicker className="date-picker" onChange={handleDateRangeChange} />
+          <Button type="default" className="filter-button" icon={<FilterOutlined />} onClick={handleFilter}>
+            Filter
+          </Button>
         </Space>
       </div>
+      
       <div className="table-container">
         <Table
           rowSelection={{
@@ -168,11 +220,11 @@ const Dashboard = () => {
         />
       </div>
       <Space>
-      <div className="print-button-container">
-        <Button type="primary" className="print-button" icon={<PrinterOutlined />} onClick={handlePrint}>
-          Print All
-        </Button>
-      </div>
+        <div className="print-button-container">
+          <Button type="primary" className="print-button" icon={<PrinterOutlined />} onClick={handlePrint}>
+            Print All
+          </Button>
+        </div>
       </Space>
     </div>
   );

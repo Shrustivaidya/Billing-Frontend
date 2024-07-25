@@ -61,3 +61,52 @@
   border-color: #1890ff;
   color: #fff;
 }
+.delete-icon {
+  font-size: 24px;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.delete-icon.selected {
+  color: red;
+}
+/* Dashboard.css */
+
+/* Hide action column when printing */
+/* Dashboard.css */
+
+/* Hide action and selection columns when printing */
+@media print {
+  .action-column,
+  .ant-table-selection-column {
+    display: none;
+  }
+
+  /* Optional: Additional styles for better print layout */
+  .dashboard-header,
+  .print-button-container,
+  .ant-table-selection {
+    display: none;
+  }
+
+  .dashboard-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .table-container {
+    width: 100%;
+  }
+
+  .ant-table {
+    width: 100%;
+    border: none;
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 8px;
+  }
+}
+
